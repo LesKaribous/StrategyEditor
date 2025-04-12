@@ -213,6 +213,10 @@ public class StrategyEditorGUI extends PApplet {
       entry.setInt("id", p.id);
       entry.setFloat("x_mm", p.x_mm);
       entry.setFloat("y_mm", p.y_mm);
+      if (p.poiName != null) {
+        entry.setString("poi", p.poiName);
+      }
+
       list.append(entry);
     }
 
@@ -246,7 +250,14 @@ public class StrategyEditorGUI extends PApplet {
       int id = entry.getInt("id");
       float x = entry.getFloat("x_mm");
       float y = entry.getFloat("y_mm");
-      StrategyEditor.points.add(new StrategyPoint(id, x, y));
+
+      StrategyPoint p = new StrategyPoint(id, x, y);
+
+      if (entry.hasKey("poi")) {
+        p.poiName = entry.getString("poi");
+      }
+
+      StrategyEditor.points.add(p);
     }
 
     mainApp.renumerotePoints();

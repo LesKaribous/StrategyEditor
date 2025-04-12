@@ -36,7 +36,7 @@ void setup() {
 
   loadPOIs("poi.h");
   debugPrintPOIs();  //affiche les POIs en console
-  loadPointsFromFile("strategy_temp.json");
+  loadStrategyFromFile("strategy_temp.json"));
 }
 
 void draw() {
@@ -257,29 +257,6 @@ float distToSegment(float px, float py, float x1, float y1, float x2, float y2) 
   float projX = x1 + t * dx;
   float projY = y1 + t * dy;
   return dist(px, py, projX, projY);
-}
-
-void loadPointsFromFile(String filename) {
-  File f = new File(dataPath(filename));
-  if (!f.exists()) {
-    println("[STRATEGY] File not found: " + filename);
-    return;
-  }
-
-  JSONObject data = loadJSONObject(dataPath(filename));
-  JSONArray list = data.getJSONArray("strategy");
-
-  points.clear();
-  for (int i = 0; i < list.size(); i++) {
-    JSONObject entry = list.getJSONObject(i);
-    int id = entry.getInt("id");
-    float x = entry.getFloat("x_mm");
-    float y = entry.getFloat("y_mm");
-    points.add(new StrategyPoint(id, x, y));
-  }
-
-  renumerotePoints();
-  println("[STRATEGY] Loaded " + points.size() + " points from " + filename);
 }
 
 public String getDataPath(String filename) {

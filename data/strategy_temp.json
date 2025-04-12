@@ -2,21 +2,25 @@
   {
     "x_mm": 1225,
     "id": 0,
+    "poi": "y2",
     "y_mm": 1775
   },
   {
     "x_mm": 1225,
     "id": 1,
+    "poi": "BannerYellow",
     "y_mm": 1894
   },
   {
     "x_mm": 1100,
     "id": 2,
+    "poi": "stock_4",
     "y_mm": 1050
   },
   {
     "x_mm": 1225,
     "id": 3,
+    "poi": "constAreaYellow_2",
     "y_mm": 1800
   },
   {
@@ -32,26 +36,31 @@
   {
     "x_mm": 775,
     "id": 6,
+    "poi": "stock_3",
     "y_mm": 1750
   },
   {
     "x_mm": 775,
     "id": 7,
+    "poi": "constAreaYellow_1",
     "y_mm": 1800
   },
   {
     "x_mm": 375,
     "id": 8,
+    "poi": "waitPointYellow",
     "y_mm": 675
   },
   {
     "x_mm": 375,
     "id": 9,
+    "poi": "y1",
     "y_mm": 225
   },
   {
     "x_mm": 1900,
     "id": 10,
+    "poi": "stock_5",
     "y_mm": 1050
   }
 ]}

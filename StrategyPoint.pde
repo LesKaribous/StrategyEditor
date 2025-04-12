@@ -14,7 +14,7 @@ class StrategyPoint {
     float py = y_mm * scale;
 
     if (this == selectedPoint) {
-      pg.stroke(255, 0, 0);       // contour rouge
+      pg.stroke(255, 0, 0);
       pg.strokeWeight(3);
       pg.fill(255, 200, 200);
     } else {
@@ -23,9 +23,9 @@ class StrategyPoint {
       pg.strokeWeight(1);
     }
 
-    pg.ellipse(px, py, 18, 18);   // ✅ plus grand qu'avant
+    pg.ellipse(px, py, 18, 18);
 
-    pg.fill(255);                 // ✅ texte en blanc
+    pg.fill(255);
     pg.textAlign(CENTER, CENTER);
     pg.text("P" + id, px, py - 14);
   }
