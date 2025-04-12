@@ -43,6 +43,9 @@ void draw() {
   background(220);
   drawTerrain();
   if (isSimulating) updateSimulation();
+  
+  drawMouseCoordinates(); // affiche les points de la souris
+  
 }
 
 void drawTerrain() {
@@ -61,6 +64,8 @@ void drawTerrain() {
   drawPOIs();
   drawPath();    // lignes reliant les points
   drawPoints();  // affichage des points
+  
+  
   if (showOverlay) {
     // Flou léger
     terrainView.filter(BLUR, 1);
@@ -88,6 +93,10 @@ void drawPoints() {
 }
 
 
+
+
+
+
 void mousePressed() {
   StrategyPoint clicked = getPointUnderMouse();
 
@@ -99,8 +108,8 @@ void mousePressed() {
       if (gui != null) gui.setSelectedPoint(selectedPoint);
     } else if (gui == null || gui.isAddPointEnabled()) {
       int insertIndex = getSegmentIndexUnderMouse();
-      float x_mm = mouseX / mmToPx;
-      float y_mm = mouseY / mmToPx;
+      float x_mm = round(mouseX / mmToPx);
+      float y_mm = round(mouseY / mmToPx);
 
       POI snap = getNearbyPOI(x_mm, y_mm, 50);
       if (snap != null) {
@@ -108,18 +117,20 @@ void mousePressed() {
         y_mm = snap.y;
       }
 
+      StrategyPoint newPoint = new StrategyPoint(nextPointId++, x_mm, y_mm);
+      if (snap != null) {
+        newPoint.poiName = snap.name;
+      }
 
       if (insertIndex != -1) {
-        points.add(insertIndex + 1, new StrategyPoint(-1, x_mm, y_mm));
+        points.add(insertIndex + 1, newPoint);
         renumerotePoints();
         println("Point inséré entre P" + insertIndex + " et P" + (insertIndex + 1));
       } else {
-        points.add(new StrategyPoint(nextPointId++, x_mm, y_mm));
+        points.add(newPoint);
       }
     }
   }
-
-
 
   if (mouseButton == RIGHT && clicked != null) {
     points.remove(clicked);
@@ -129,26 +140,30 @@ void mousePressed() {
 }
 
 
+
 void mouseDragged() {
   if (isDragging && selectedPoint != null) {
-    float x_mm = constrain(mouseX / mmToPx, 0, 3000);
-    float y_mm = constrain(mouseY / mmToPx, 0, 2000);
+    float x_mm = round(constrain(mouseX / mmToPx, 0, 3000));
+    float y_mm = round(constrain(mouseY / mmToPx, 0, 2000));
 
     POI snap = getNearbyPOI(x_mm, y_mm, 50);
     if (snap != null) {
       x_mm = snap.x;
       y_mm = snap.y;
+      selectedPoint.poiName = snap.name;
+    } else {
+      selectedPoint.poiName = null;
     }
 
     selectedPoint.x_mm = x_mm;
     selectedPoint.y_mm = y_mm;
 
-
     if (gui != null) {
-      gui.setSelectedPoint(selectedPoint);  // mise à jour dynamique !
+      gui.setSelectedPoint(selectedPoint);  // mise à jour dynamique
     }
   }
 }
+
 
 
 void mouseReleased() {
@@ -329,4 +344,19 @@ POI getNearbyPOI(float x_mm, float y_mm, float tolerance_mm) {
     }
   }
   return null;
+}
+
+void drawMouseCoordinates() {
+  float x_mm = round(mouseX / mmToPx);
+  float y_mm = round(mouseY / mmToPx);
+
+  fill(255);
+  stroke(0);
+  strokeWeight(1);
+  rect(10, height - 30, 190, 20);
+
+  fill(0);
+  textAlign(LEFT, CENTER);
+  textFont(createFont("Arial", 12));
+  text("X: " + int(x_mm) + " mm   Y: " + int(y_mm) + " mm", 15, height - 20);
 }
