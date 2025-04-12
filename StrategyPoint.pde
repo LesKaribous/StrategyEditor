@@ -1,6 +1,7 @@
 class StrategyPoint {
   int id;
   float x_mm, y_mm;
+  String poiName = null; // nom du POI associé, ou null s'il n'y en a pas
 
   StrategyPoint(int id, float x_mm, float y_mm) {
     this.id = id;
