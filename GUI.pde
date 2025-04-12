@@ -15,7 +15,7 @@ boolean addPointEnabled = true;
 Toggle toggleShowOverlay;
 
 int lastAutoSave = 0;
-int autoSaveInterval = 60 * 1000; // xx seconds
+int autoSaveInterval = 30 * 1000; // xx seconds
 
 public class StrategyEditorGUI extends PApplet {
 
@@ -27,6 +27,7 @@ public class StrategyEditorGUI extends PApplet {
 
   public void setup() {
     surface.setTitle("StrategyEditor - GUI");
+    surface.setLocation(1320, 100); // à droite de la fenêtre principale
     cp5 = new ControlP5(this);
 
     labelInfo = cp5.addTextlabel("labelInfo")
@@ -91,6 +92,13 @@ public class StrategyEditorGUI extends PApplet {
       .setValue(false)
       .setLabel("Show table overlay");
     toggleShowOverlay.getCaptionLabel().setColor(color(0, 102, 153));
+    cp5.addButton("reloadTempStrategy")
+      .setLabel("Reload temp strategy")
+      .setPosition(20, 560)
+      .setSize(180, 30);
+      
+    // Reload temp strategy
+    reloadTempStrategy();
   }
 
   public void draw() {
@@ -200,6 +208,13 @@ public class StrategyEditorGUI extends PApplet {
       // Sinon, on utilise le chemin relatif depuis le sketch
       saveJSONObject(data, mainApp.getDataPath(path));
     }
+  }
+
+
+  public void reloadTempStrategy() {
+    println("[GUI] Reloading strategy_temp.json...");
+    File f = new File(mainApp.getDataPath("strategy_temp.json"));
+    loadStrategyFromFile(f);
   }
 
 

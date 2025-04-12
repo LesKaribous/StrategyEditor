@@ -21,6 +21,7 @@ void settings() {
 
 void setup() {
   surface.setTitle("StrategyEditor - Terrain View");
+  surface.setLocation(100, 100);
 
   // Lancement de la GUI dans une autre fenêtre
   gui = new StrategyEditorGUI();
@@ -36,7 +37,6 @@ void setup() {
 
   loadPOIs("poi.h");
   debugPrintPOIs();  //affiche les POIs en console
-  loadStrategyFromFile("strategy_temp.json"));
 }
 
 void draw() {
@@ -78,8 +78,6 @@ void drawTerrain() {
 
   drawOverlay(terrainView, mmToPx);
 
-
-
   terrainView.endDraw();
 
   // Affichage sur la fenêtre principale
@@ -91,10 +89,6 @@ void drawPoints() {
     p.draw(terrainView, mmToPx);
   }
 }
-
-
-
-
 
 
 void mousePressed() {
