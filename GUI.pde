@@ -112,8 +112,10 @@ public class StrategyEditorGUI extends PApplet {
       labelInfo.setText(
         "Point P" + selected.id +
         "\nX: " + nf(selected.x_mm, 0, 1) + " mm" +
-        "\nY: " + nf(selected.y_mm, 0, 1) + " mm"
+        "\nY: " + nf(selected.y_mm, 0, 1) + " mm" +
+        "\nPOI: " + selected.poiName
         );
+
 
       fieldX.setText(nf(selected.x_mm, 0, 1));
       fieldY.setText(nf(selected.y_mm, 0, 1));
