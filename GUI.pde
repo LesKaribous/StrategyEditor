@@ -25,81 +25,87 @@ public class StrategyEditorGUI extends PApplet {
     size(400, 600);
   }
 
-  public void setup() {
-    surface.setTitle("StrategyEditor - GUI");
-    surface.setLocation(1320, 100); // à droite de la fenêtre principale
-    cp5 = new ControlP5(this);
+public void setup() {
+  surface.setTitle("StrategyEditor - GUI");
+  surface.setLocation(1320, 100);
+  cp5 = new ControlP5(this);
 
-    labelInfo = cp5.addTextlabel("labelInfo")
-      .setText("No point selected")
-      .setPosition(20, 40)
-      .setSize(360, 100)
-      .setColorValue(color(0, 102, 153));
+  // Bloc 1 : Infos point sélectionné
+  labelInfo = cp5.addTextlabel("labelInfo")
+    .setText("No point selected")
+    .setPosition(20, 40)
+    .setSize(360, 100)
+    .setColorValue(color(0, 102, 153));
 
-    fieldX = cp5.addTextfield("x_mm")
-      .setPosition(20, 160)
-      .setSize(100, 30)
-      .setAutoClear(false)
-      .setLabel("X (mm)")
-      .setText("0.0");
-    fieldX.getCaptionLabel().setColor(color(0, 102, 153));
+  fieldX = cp5.addTextfield("x_mm")
+    .setPosition(20, 160)
+    .setSize(100, 30)
+    .setAutoClear(false)
+    .setLabel("X (mm)")
+    .setText("0.0");
+  fieldX.getCaptionLabel().setColor(color(0, 102, 153));
 
-    fieldY = cp5.addTextfield("y_mm")
-      .setPosition(140, 160)
-      .setSize(100, 30)
-      .setAutoClear(false)
-      .setLabel("Y (mm)")
-      .setText("0.0");
-    fieldY.getCaptionLabel().setColor(color(0, 102, 153));
+  fieldY = cp5.addTextfield("y_mm")
+    .setPosition(140, 160)
+    .setSize(100, 30)
+    .setAutoClear(false)
+    .setLabel("Y (mm)")
+    .setText("0.0");
+  fieldY.getCaptionLabel().setColor(color(0, 102, 153));
 
-    toggleAddEnabled = cp5.addToggle("addPointEnabled")
-      .setPosition(20, 220)
-      .setSize(20, 20)
-      .setLabel("Add points enabled")
-      .setValue(true);
-    toggleAddEnabled.getCaptionLabel().setColor(color(0, 102, 153));
+  // Bloc 2 : Activation
+  toggleAddEnabled = cp5.addToggle("addPointEnabled")
+    .setPosition(20, 220)
+    .setSize(20, 20)
+    .setLabel("Add points enabled")
+    .setValue(true);
+  toggleAddEnabled.getCaptionLabel().setColor(color(0, 102, 153));
 
-    cp5.addButton("saveStrategy")
-      .setLabel("Save strategy")
-      .setPosition(20, 280)
-      .setSize(120, 30);
-    cp5.addButton("loadStrategy")
-      .setLabel("Load strategy")
-      .setPosition(160, 280)
-      .setSize(120, 30);
+  // Bloc 3 : Navigation
+  cp5.addButton("selectPrevPoint")
+    .setLabel("Previous point")
+    .setPosition(20, 270)
+    .setSize(120, 30);
+  cp5.addButton("selectNextPoint")
+    .setLabel("Next point")
+    .setPosition(160, 270)
+    .setSize(120, 30);
 
-    cp5.addButton("resetStrategy")
-      .setLabel("Reset strategy")
-      .setPosition(20, 330)
-      .setSize(120, 30);
+  // Bloc 4 : Sauvegarde / chargement
+  cp5.addButton("saveStrategy")
+    .setLabel("Save strategy")
+    .setPosition(20, 320)
+    .setSize(120, 30);
+  cp5.addButton("loadStrategy")
+    .setLabel("Load strategy")
+    .setPosition(160, 320)
+    .setSize(120, 30);
+  cp5.addButton("resetStrategy")
+    .setLabel("Reset strategy")
+    .setPosition(20, 370)
+    .setSize(120, 30);
+  cp5.addButton("reloadTempStrategy")
+    .setLabel("Reload temp strategy")
+    .setPosition(20, 410)
+    .setSize(260, 30);
 
-    cp5.addButton("selectPrevPoint")
-      .setLabel("Previous point")
-      .setPosition(20, 380)
-      .setSize(120, 30);
+  // Bloc 5 : Simulation / overlay
+  cp5.addButton("startSimulation")
+    .setLabel("Start simulation")
+    .setPosition(20, 470)
+    .setSize(120, 30);
 
-    cp5.addButton("selectNextPoint")
-      .setLabel("Next point")
-      .setPosition(160, 380)
-      .setSize(120, 30);
-    cp5.addButton("startSimulation")
-      .setLabel("Start simulation")
-      .setPosition(20, 430)
-      .setSize(120, 30);
-    toggleShowOverlay = cp5.addToggle("showOverlay")
-      .setPosition(20, 530)
-      .setSize(20, 20)
-      .setValue(false)
-      .setLabel("Show table overlay");
-    toggleShowOverlay.getCaptionLabel().setColor(color(0, 102, 153));
-    cp5.addButton("reloadTempStrategy")
-      .setLabel("Reload temp strategy")
-      .setPosition(20, 560)
-      .setSize(180, 30);
-      
-    // Reload temp strategy
-    reloadTempStrategy();
-  }
+  toggleShowOverlay = cp5.addToggle("showOverlay")
+    .setPosition(20, 520)
+    .setSize(20, 20)
+    .setValue(false)
+    .setLabel("Show table overlay");
+  toggleShowOverlay.getCaptionLabel().setColor(color(0, 102, 153));
+
+  // Chargement automatique au démarrage
+  reloadTempStrategy();
+}
+
 
   public void draw() {
     background(220);
