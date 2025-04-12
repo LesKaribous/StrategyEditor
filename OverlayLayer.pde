@@ -97,16 +97,22 @@ void drawAngleRosace(PGraphics pg, float scale) {
   if (robotOverlayImg != null) {
     float robotSize_px = overlayRobotSize_mm * StrategyEditor.mmToPx;
 
+    pg.pushMatrix();
+    pg.translate(centerX, centerY);
+    pg.rotate(HALF_PI);  // rotation de 90° vers la droite
+
     pg.imageMode(CENTER);
-    pg.tint(255); // transparence légère pour ne pas gêner la rosace
-    pg.image(robotOverlayImg, centerX, centerY, robotSize_px, robotSize_px);
+    pg.tint(255); // transparence légère
+    pg.image(robotOverlayImg, 0, 0, robotSize_px, robotSize_px);
     pg.noTint();
+    pg.popMatrix();
   }
+
 
 
   // Traits d'angle (tous les 30°)
   for (int a = 0; a < 360; a += 30) {
-    float angle = radians(-a-90);
+    float angle = radians(-a);
 
     float x1 = centerX + cos(angle) * (radius - lineLength);
     float y1 = centerY + sin(angle) * (radius - lineLength);
@@ -129,7 +135,7 @@ void drawAngleRosace(PGraphics pg, float scale) {
   pg.fill(255);
 
   for (int i = 0; i < labels.length; i++) {
-    float a = radians(-angles[i] - 90);  // même correction que pour les ticks
+    float a = radians(-angles[i]);  // même correction que pour les ticks
     float lx = centerX + cos(a) * labelRadius;
     float ly = centerY + sin(a) * labelRadius;
     pg.text(labels[i], lx, ly);
