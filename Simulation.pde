@@ -8,10 +8,10 @@ public static float robotWidth_mm = 287;
 public static float robotHeight_mm = 284;
 public static float robotHitbox_mm = 400;
 
-
+public static float robotSpeed_mm_per_sec = 600.0; // vitesse constante
+public static float frameRateSim = 60.0; // fréquence cible
 
 PImage robotImg;
-
 
 void updateSimulation() {
   if (!isSimulating || StrategyEditor.points.size() < 2) return;
@@ -25,18 +25,26 @@ void updateSimulation() {
   StrategyPoint p1 = StrategyEditor.points.get(currentSegment);
   StrategyPoint p2 = StrategyEditor.points.get(currentSegment + 1);
 
+  float dx = p2.x_mm - p1.x_mm;
+  float dy = p2.y_mm - p1.y_mm;
+  float dist_mm = dist(p1.x_mm, p1.y_mm, p2.x_mm, p2.y_mm);
+
+  float duration_sec = dist_mm / robotSpeed_mm_per_sec;
+  float totalFrames = duration_sec * frameRateSim;
+  float deltaT = 1.0 / totalFrames;
+
   float easedT = easeInOut(t);
   float x = lerp(p1.x_mm, p2.x_mm, easedT);
   float y = lerp(p1.y_mm, p2.y_mm, easedT);
-
   robotPos.set(x, y);
 
-  t += speed;
+  t += deltaT;
   if (t >= 1.0) {
     t = 0.0;
     currentSegment++;
   }
 }
+
 
 void drawRobot(PGraphics pg, float scale) {
   if (!isSimulating || robotPos == null) return;
@@ -62,8 +70,6 @@ void drawRobot(PGraphics pg, float scale) {
   pg.popStyle();
   pg.popMatrix();
 }
-
-
 
 float easeInOut(float t) {
   return t * t * (3 - 2 * t);  // interpolation douce entre 0 et 1

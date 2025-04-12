@@ -3,10 +3,22 @@ class StrategyPoint {
   float x_mm, y_mm;
   String poiName = null; // nom du POI associé, ou null s'il n'y en a pas
 
+  boolean useAlign = false;
+  String compass = "";
+  String orientation = ""; // ou "NORTH", "SOUTH", etc.
+  int customAngle = 0;          // utilisé si CUSTOM
+
+
   StrategyPoint(int id, float x_mm, float y_mm) {
     this.id = id;
     this.x_mm = x_mm;
     this.y_mm = y_mm;
+
+    // initialisation des champs d'alignement
+    this.useAlign = false;
+    this.compass = "A";
+    this.orientation = "CUSTOM";
+    this.customAngle = 0;
   }
 
   void draw(PGraphics pg, float scale) {

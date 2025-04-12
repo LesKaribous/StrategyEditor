@@ -13,7 +13,7 @@ boolean isDragging = false;
 ArrayList<POI> pois = new ArrayList<POI>();
 
 
-
+CodePreviewWindow previewWindow = null;
 
 void settings() {
   size(1200, 800); // taille de la fenêtre principale
@@ -27,6 +27,10 @@ void setup() {
   gui = new StrategyEditorGUI();
   gui.setMainApp(this);
   PApplet.runSketch(new String[] { "GUI" }, gui);
+  
+  // Lancement du code preview dans une nouvelle fenetre
+  previewWindow = new CodePreviewWindow("waiting");
+  PApplet.runSketch(new String[] { "CodePreview" }, previewWindow);
 
 
   terrainView = createGraphics(1200, 800); // Surface pour dessiner le terrain
