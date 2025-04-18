@@ -52,5 +52,69 @@
     "useAlign": false,
     "id": 5,
     "y_mm": 1143
+  },
+  {
+    "x_mm": 808,
+    "customAngle": 0,
+    "orientation": "CUSTOM",
+    "compass": "A",
+    "useAlign": false,
+    "id": 6,
+    "y_mm": 900
+  },
+  {
+    "x_mm": 2228,
+    "customAngle": 0,
+    "orientation": "CUSTOM",
+    "compass": "A",
+    "useAlign": false,
+    "id": 7,
+    "y_mm": 913
+  },
+  {
+    "x_mm": 1060,
+    "customAngle": 0,
+    "orientation": "CUSTOM",
+    "compass": "A",
+    "useAlign": false,
+    "id": 8,
+    "y_mm": 1415
+  },
+  {
+    "x_mm": 1948,
+    "customAngle": 0,
+    "orientation": "CUSTOM",
+    "compass": "A",
+    "useAlign": false,
+    "id": 9,
+    "y_mm": 1408
+  },
+  {
+    "x_mm": 775,
+    "customAngle": 0,
+    "orientation": "CUSTOM",
+    "compass": "A",
+    "useAlign": false,
+    "id": 10,
+    "y_mm": 1413
+  },
+  {
+    "x_mm": 2225,
+    "customAngle": 0,
+    "orientation": "CUSTOM",
+    "compass": "A",
+    "useAlign": false,
+    "id": 11,
+    "y_mm": 1413
+  },
+  {
+    "x_mm": 2625,
+    "customAngle": 0,
+    "orientation": "CUSTOM",
+    "compass": "A",
+    "useAlign": false,
+    "id": 12,
+    "poi": "waitPointBlue",
+    "y_mm": 675
   }
 ]}
